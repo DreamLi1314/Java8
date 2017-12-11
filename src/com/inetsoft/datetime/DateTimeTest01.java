@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
  * @Date: 2017年12月11日 上午10:47:39
  * @Version: 1.0.0
  */
-public class DateTimeTest {
+public class DateTimeTest01 {
 	
 	public static void main(String[] args) throws Exception {
 //		test01(); // Error
