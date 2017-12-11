@@ -35,30 +35,30 @@ public class DateTimeTest {
 	 */
 	public static void test03() throws Exception {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");//DateTimeFormatter.ISO_DATE_TIME
-
+	
 		ExecutorService pool = Executors.newFixedThreadPool(10);
-
+	
 		Callable<LocalDateTime> task = new Callable<LocalDateTime>() {
 			@Override
 			public LocalDateTime call() throws Exception {
 				return LocalDateTime.parse("20171211 11:25:59", dtf);
 			}
 		};
-
+	
 		List<Future<LocalDateTime>> dates = new ArrayList<>();
-
+	
 		for (int i = 0; i < 10; i++) {
 			Future<LocalDateTime> date = pool.submit(task);
 			dates.add(date);
 		}
-
+	
 		for (Future<LocalDateTime> future : dates) {
 			System.out.println(future.get());
 		}
 		
 		pool.shutdown();
 	}
-	
+
 	/**
 	 * @Description: 解决 test01 存在的多线程问题 
 	 * @Warning:
@@ -68,21 +68,21 @@ public class DateTimeTest {
 	 */
 	public static void test02() throws Exception {
 		ExecutorService pool = Executors.newFixedThreadPool(10);
-
+	
 		Callable<Date> task = new Callable<Date>() {
 			@Override
 			public Date call() throws Exception {
 				return DateTimeThreadLocal.convert("20171211");
 			}
 		};
-
+	
 		List<Future<Date>> dates = new ArrayList<>();
-
+	
 		for (int i = 0; i < 10; i++) {
 			Future<Date> date = pool.submit(task);
 			dates.add(date);
 		}
-
+	
 		for (Future<Date> future : dates) {
 			System.out.println(future.get());
 		}
@@ -99,23 +99,23 @@ public class DateTimeTest {
 	 */
 	public static void test01() throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
+	
 		ExecutorService pool = Executors.newFixedThreadPool(10);
-
+	
 		Callable<Date> task = new Callable<Date>() {
 			@Override
 			public Date call() throws Exception {
 				return sdf.parse("20171211");
 			}
 		};
-
+	
 		List<Future<Date>> dates = new ArrayList<>();
-
+	
 		for (int i = 0; i < 10; i++) {
 			Future<Date> date = pool.submit(task);
 			dates.add(date);
 		}
-
+	
 		for (Future<Date> future : dates) {
 			System.out.println(future.get());
 		}

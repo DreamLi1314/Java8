@@ -12,18 +12,14 @@ import java.util.Date;
  * @Version: 1.0.0
  */
 public class DateTimeThreadLocal {
-
 	private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {
-
 		@Override
 		protected DateFormat initialValue() {
 			return new SimpleDateFormat("yyyyMMdd");
 		}
-		
 	};
-	
+
 	public static Date convert(String source) throws Exception {
 		return df.get().parse(source);
 	}
-	
 }
